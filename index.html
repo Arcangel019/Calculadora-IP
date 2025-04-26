@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Subredes IPv4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Subredes IPv4</h1>
+        <div class="input-group">
+            <label for="red">Dirección de Red (ej: 192.168.1.0/24):</label>
+            <input type="text" id="red" placeholder="192.168.1.0/24">
+        </div>
+        <div class="input-group">
+            <label for="num_subredes">Número de Subredes Necesarias:</label>
+            <input type="number" id="num_subredes" placeholder="Ingrese el número">
+        </div>
+        <button onclick="calcularSubredes()">Calcular Subredes</button>
+
+        <div id="resultados" class="resultados">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
