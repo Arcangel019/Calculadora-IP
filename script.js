@@ -5,8 +5,6 @@ function calcularSubredes() {
     resultadosDiv.innerHTML = "<p>Calculando...</p>"; // Mensaje de carga
 
     try {
-        // --- Reimplementación de la lógica de Python en JavaScript ---
-
         function parsearRed(redString) {
             const parts = redString.split('/');
             if (parts.length !== 2) {
@@ -36,6 +34,12 @@ function calcularSubredes() {
             return [(ipInt >> 24) & 255, (ipInt >> 16) & 255, (ipInt >> 8) & 255, ipInt & 255].join('.');
         }
 
+        function ipToBinaryString(ipInt) {
+            return [(ipInt >> 24) & 255, (ipInt >> 16) & 255, (ipInt >> 8) & 255, ipInt & 255]
+                .map(octet => octet.toString(2).padStart(8, '0'))
+                .join('.');
+        }
+
         const { ipAddress, prefixLength } = parsearRed(red);
 
         const bitsSubred = Math.ceil(Math.log2(numSubredes));
@@ -55,12 +59,15 @@ function calcularSubredes() {
             const networkAddressInt = ipAddress + (i * incremento);
             const broadcastAddressInt = networkAddressInt + incremento - 1;
             const primeraIPInt = networkAddressInt + 1;
+            const segundaIPInt = primeraIPInt + 1;
             const ultimaIPInt = broadcastAddressInt - 1;
 
             subredesResult.push({
-                "N° Subred": i,
+                "N° Subred": i + 1, // Iniciar desde 1
                 "Dirección de Red": `${ipIntToString(networkAddressInt)}/${nuevaMascara}`,
-                "1ª IP Válida": ipIntToString(primeraIPInt),
+                "Dirección de Red (Bits)": ipToBinaryString(networkAddressInt),
+                "Gateway": ipIntToString(primeraIPInt),
+                "1ª IP Válida": ipIntToString(segundaIPInt),
                 "Última IP Válida": ipIntToString(ultimaIPInt),
                 "Broadcast": ipIntToString(broadcastAddressInt),
                 "Hosts por Subred": hostsPorSubred
@@ -86,6 +93,8 @@ function calcularSubredes() {
                         <tr>
                             <th>N° Subred</th>
                             <th>Dirección de Red</th>
+                            <th>Dirección de Red (Bits)</th>
+                            <th>Gateway</th>
                             <th>1ª IP Válida</th>
                             <th>Última IP Válida</th>
                             <th>Broadcast</th>
@@ -99,6 +108,8 @@ function calcularSubredes() {
                         <tr>
                             <td>${subred["N° Subred"]}</td>
                             <td>${subred["Dirección de Red"]}</td>
+                            <td>${subred["Dirección de Red (Bits)"]}</td>
+                            <td>${subred["Gateway"]}</td>
                             <td>${subred["1ª IP Válida"]}</td>
                             <td>${subred["Última IP Válida"]}</td>
                             <td>${subred["Broadcast"]}</td>
@@ -114,7 +125,8 @@ function calcularSubredes() {
                 <p><strong>Explicación breve:</strong></p>
                 <ul>
                     <li>Dirección de Red: Múltiplo del incremento en el último octeto</li>
-                    <li>1ª IP Válida: Dirección de red + 1</li>
+                    <li>Gateway: Primera dirección IP de la subred</li>
+                    <li>1ª IP Válida: Segunda dirección IP de la subred</li>
                     <li>Última IP Válida: Broadcast - 1</li>
                     <li>Cada subred tiene ${hostsPorSubred} hosts válidos (2<sup>${32 - nuevaMascara}</sup> - 2)</li>
                 </ul>
