@@ -1,107 +1,90 @@
 body {
-    font-family: sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    background-color: #f8f9fa;
     min-height: 100vh;
 }
 
-.container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
+.card {
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.input-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="number"] {
-    width: calc(100% - 12px);
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.resultados {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    white-space: pre-wrap; /* Para preservar el formato del texto */
+.binary {
     font-family: monospace;
-    font-size: 14px;
-    color: #333;
+    background-color: #e9ecef;
+    padding: 2px 5px;
+    border-radius: 3px;
+    word-break: break-all;
 }
 
-.error {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px;
+.highlight {
+    background-color: #fff3cd;
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.steps {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #0d6efd;
+}
+
+.step {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.step:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .table-container {
     overflow-x: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+.table {
+    margin-bottom: 0;
 }
 
-th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
+.table th {
+    background-color: #f1f5f9;
+    font-weight: 600;
 }
 
-th {
-    background-color: #f0f0f0;
+.resultados {
+    background-color: white;
+    border-radius: 8px;
+    padding: 0;
+}
+
+.footer {
+    border-top: 1px solid #dee2e6;
+}
+
+/* Estilos para la calculadora binaria */
+.tab-content {
+    min-height: 300px;
+}
+
+#procesoConversion, #procesoConversionBinario {
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+.binary-step {
+    color: #0d6efd;
     font-weight: bold;
 }
 
-.explanation {
-    margin-top: 15px;
-    font-size: 0.9em;
-    color: #777;
+@media (max-width: 768px) {
+    .steps, .table-container {
+        font-size: 0.9rem;
+    }
 }
