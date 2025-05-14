@@ -46,7 +46,7 @@ body {
     overflow-x: auto;
     margin-top: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .table {
@@ -73,7 +73,8 @@ body {
     min-height: 300px;
 }
 
-#procesoConversion, #procesoConversionBinario {
+#procesoConversion,
+#procesoConversionBinario {
     font-family: monospace;
     white-space: pre-wrap;
 }
@@ -84,7 +85,41 @@ body {
 }
 
 @media (max-width: 768px) {
-    .steps, .table-container {
+
+    .steps,
+    .table-container {
         font-size: 0.9rem;
     }
+}
+
+.code-block {
+    background: #2d2d2d;
+    color: #f8f9fa;
+    border-radius: 5px;
+    padding: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.code-block p {
+    margin-bottom: 0.5rem;
+}
+
+.command {
+    color: #4ec9b0;
+}
+
+.response {
+    color: #dcdcaa;
+}
+
+.router-prompt {
+    color: #569cd6;
+}
+
+.section-title {
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
 }
