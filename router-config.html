@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de router</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">
+                <i class="bi bi-router"></i> Configuración de Router Cisco
+            </h1>
+            <p class="lead">Guía paso a paso para configurar tu router</p>
+            <button class="btn btn-primary btn-lg mt-3" onclick="window.location.href='index.html'">
+                <i class="bi bi-calculator"></i> Calculadora de IP
+            </button>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Conectarse al router</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-block">
+                            <p>Would you like to enter the initial configuration dialog? [yes/no]: <span
+                                    class="command">no</span></p>
+                            <p>Press RETURN to get started!</p>
+                            <p class="router-prompt">Router></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Ingresar al modo privilegiado</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-block">
+                            <p class="router-prompt">Router><span class="command">enable</span></p>
+                            <p class="router-prompt">Router#<span class="command">configure terminal</span></p>
+                            <p>Enter configuration commands, one per line. End with CNTL/Z.</p>
+                            <p class="router-prompt">Router(config)#</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Cambiar nombre al router</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-block">
+                            <p class="router-prompt">Router(config)#<span class="command">hostname RedesI</span></p>
+                            <p class="router-prompt">RedesI(config)#</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Configurar contraseñas</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="h6 section-title">Contraseña para consola</h3>
+                        <div class="code-block">
+                            <p class="router-prompt">RedesI(config)#<span class="command">line console 0</span></p>
+                            <p class="router-prompt">RedesI(config-line)#<span class="command">password 123456</span>
+                            </p>
+                            <p class="router-prompt">RedesI(config-line)#<span class="command">login</span></p>
+                            <p class="router-prompt">RedesI(config-line)#<span class="command">exit</span></p>
+                        </div>
+
+                        <h3 class="h6 section-title">Contraseña modo privilegiado</h3>
+                        <div class="code-block">
+                            <p class="router-prompt">RedesI(config)#<span class="command">enable secret 123456</span>
+                            </p>
+                        </div>
+
+                        <h3 class="h6 section-title">Contraseña acceso remoto (VTY)</h3>
+                        <div class="code-block">
+                            <p class="router-prompt">RedesI(config)#<span class="command">line vty 0 15</span></p>
+                            <p class="router-prompt">RedesI(config-line)#<span class="command">password 123456</span>
+                            </p>
+                            <p class="router-prompt">RedesI(config-line)#<span class="command">login</span></p>
+                            <p class="router-prompt">RedesI(config-line)#<span class="command">exit</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Configuraciones adicionales</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="h6 section-title">Encriptar contraseñas</h3>
+                        <div class="code-block">
+                            <p class="router-prompt">RedesI(config)#<span class="command">service
+                                    password-encryption</span></p>
+                        </div>
+
+                        <h3 class="h6 section-title">Configurar banner</h3>
+                        <div class="code-block">
+                            <p class="router-prompt">RedesI(config)#<span class="command">banner motd "ACCESO, SOLO A
+                                    PERSONAL AUTORIZADO"</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Configuración de interfaces</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-block">
+                            <p class="router-prompt">RedesI(config)#<span class="command">interface gigabitEthernet
+                                    0/0</span></p>
+                            <p class="router-prompt">RedesI(config-if)#<span class="command">ip address 192.168.1.1
+                                    255.255.255.0</span></p>
+                            <p class="router-prompt">RedesI(config-if)#<span class="command">no shutdown</span></p>
+                            <p class="text-muted">// Realizar la misma operación por cada interface</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Guardar configuración</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-block">
+                            <p class="router-prompt">RedesI#<span class="command">copy running-config
+                                    startup-config</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Acceso remoto</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-block">
+                            <p>C:\><span class="command">telnet 192.168.1.1</span></p>
+                            <p>Trying 192.168.1.1 ...Open</p>
+                            <p>User Access Verification</p>
+                            <p>Password: <span class="command">123456</span></p>
+                            <p class="router-prompt">Router></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
