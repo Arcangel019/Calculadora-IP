@@ -1,153 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Subredes IPv4 - Detallada</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="icon" href="logo-circular.jpg" type="image/jpg">
-      <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Subredes IPv4 - Detallada</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="icon" href="logo-circular.jpg" type="image/jpg">
 </head>
 <body class="bg-light">
-    <div class="container py-4">
-        <div class="text-center my-4">
-            <a href="router-config.html" class="btn btn-primary btn-lg">
-                <i class="bi bi-router"></i> Configura tu router
+  <div class="container py-5">
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white py-3">
+        <h1 class="text-center mb-0 display-5">
+          <i class="bi bi-calculator"></i> Calculadora de Subredes IPv4
+        </h1>
+      </div>
+
+      <div class="card-body">
+        <div class="alert alert-info">
+          <h4 class="alert-heading"><i class="bi bi-info-circle"></i> ¿Cómo usar esta calculadora?</h4>
+          <ol class="mb-0 ps-3">
+            <li class="mb-2">Ingresa tu dirección de red en formato CIDR (ej: 192.168.1.0/24)</li>
+            <li class="mb-2">Especifica el número de subredes que necesitas crear</li>
+            <li class="mb-2">Haz clic en "Calcular Subredes"</li>
+            <li>Revisa los pasos detallados del cálculo y la tabla de resultados</li>
+          </ol>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="red" class="form-label fw-bold">
+              <i class="bi bi-diagram-2"></i> Dirección de Red:
+            </label>
+            <input type="text" class="form-control form-control-lg" id="red" placeholder="192.168.1.0/24">
+          </div>
+          <div class="col-md-6">
+            <label for="num_subredes" class="form-label fw-bold">
+              <i class="bi bi-collection"></i> Número de Subredes:
+            </label>
+            <input type="number" class="form-control form-control-lg" id="num_subredes" placeholder="Ej: 4">
+          </div>
+        </div>
+
+        <div class="row g-3 mt-4">
+          <div class="col-md-4">
+            <button class="btn btn-primary w-100 py-3 fw-bold" onclick="calcularSubredes()">
+              <i class="bi bi-calculator-fill me-2"></i> Calcular
+            </button>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="alert alert-info h-100 mb-0">
+              <h5 class="alert-heading"><i class="bi bi-info-circle"></i> ¿Necesitas ayuda?</h5>
+              <p class="mb-0">Te ayudamos a configurar correctamente tu router</p>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <a href="router-config.html" class="btn btn-primary w-100 py-3 fw-bold">
+              <i class="bi bi-router me-2"></i> Configurar
             </a>
+          </div>
         </div>
-    </div>
 
-    <div class="container py-3">
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white py-3">
-                <h1 class="text-center mb-0 display-5">
-                    <i class="bi bi-calculator"></i> Calculadora de Subredes IPv4
-                </h1>
+        <div class="card-header bg-primary text-white mt-5 py-3">
+          <h2 class="text-center mb-0 display-5">
+            <i class="bi bi-0-circle"></i> Calculadora Binaria
+          </h2>
+        </div>
+
+        <div class="alert alert-info mt-3">
+          <h4 class="alert-heading"><i class="bi bi-info-circle"></i> ¿Cómo usar esta calculadora?</h4>
+          <ol class="mb-0 ps-3">
+            <li class="mb-2">Ingresa el número que deseas convertir</li>
+            <li class="mb-2">Selecciona el tipo de conversión</li>
+            <li class="mb-2">Haz clic en "Convertir"</li>
+            <li>Revisa el resultado y el proceso detallado</li>
+          </ol>
+        </div>
+
+        <ul class="nav nav-tabs mt-4" id="calculadoraTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-bold" id="decimal-binario-tab" data-bs-toggle="tab"
+              data-bs-target="#decimal-binario" type="button" role="tab">
+              <i class="bi bi-arrow-down"></i> Decimal a Binario
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold" id="binario-decimal-tab" data-bs-toggle="tab"
+              data-bs-target="#binario-decimal" type="button" role="tab">
+              <i class="bi bi-arrow-up"></i> Binario a Decimal
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content p-4 border border-top-0 rounded-bottom bg-white">
+          <div class="tab-pane fade show active" id="decimal-binario" role="tabpanel">
+            <div class="mb-4">
+              <label for="numeroDecimal" class="form-label fw-bold">
+                <i class="bi bi-123"></i> Número Decimal:
+              </label>
+              <input type="number" class="form-control form-control-lg" id="numeroDecimal"
+                placeholder="Ej: 255">
             </div>
-
-            <div class="card-body">
-                <div class="alert alert-info">
-                    <h4 class="alert-heading"><i class="bi bi-info-circle"></i> ¿Cómo usar esta calculadora?</h4>
-                    <ol class="mb-0 ps-3">
-                        <li class="mb-2">Ingresa tu dirección de red en formato CIDR (ej: 192.168.1.0/24)</li>
-                        <li class="mb-2">Especifica el número de subredes que necesitas crear</li>
-                        <li class="mb-2">Haz clic en "Calcular Subredes"</li>
-                        <li>Revisa los pasos detallados del cálculo y la tabla de resultados</li>
-                    </ol>
-                </div>
-
-                <div class="row g-3 mt-3">
-                    <div class="col-md-6">
-                        <label for="red" class="form-label fw-bold">
-                            <i class="bi bi-diagram-2"></i> Dirección de Red (ej: 192.168.1.0/24):
-                        </label>
-                        <input type="text" class="form-control form-control-lg" id="red" placeholder="192.168.1.0/24">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="num_subredes" class="form-label fw-bold">
-                            <i class="bi bi-collection"></i> Número de Subredes Necesarias:
-                        </label>
-                        <input type="number" class="form-control form-control-lg" id="num_subredes" placeholder="Ingrese el número">
-                    </div>
-                </div>
-
-                <button class="btn btn-primary mt-4 w-100 py-3 fw-bold" onclick="calcularSubredes()">
-                    <i class="bi bi-calculator-fill"></i> Calcular Subredes
-                </button>
-
-                <div id="resultados" class="resultados mt-4"></div>
-
-                <!-- Sección de la calculadora binaria -->
-                <div class="card-header bg-primary text-white mt-5 py-3">
-                    <h1 class="text-center mb-0 display-5">
-                        <i class="bi bi-0-circle"></i> Calculadora de Números Binarios
-                    </h1>
-                </div>
-
-                <div class="alert alert-info mt-3">
-                    <h4 class="alert-heading"><i class="bi bi-info-circle"></i> ¿Cómo usar esta calculadora?</h4>
-                    <ol class="mb-0 ps-3">
-                        <li class="mb-2">Ingresa el número que deseas convertir</li>
-                        <li class="mb-2">Selecciona el tipo de conversión</li>
-                        <li class="mb-2">Haz clic en "Convertir"</li>
-                        <li>Revisa el resultado y el proceso detallado</li>
-                    </ol>
-                </div>
-
-                <ul class="nav nav-tabs mt-4" id="calculadoraTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active fw-bold" id="decimal-binario-tab" data-bs-toggle="tab" data-bs-target="#decimal-binario" type="button" role="tab">
-                            <i class="bi bi-arrow-down"></i> Decimal a Binario
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link fw-bold" id="binario-decimal-tab" data-bs-toggle="tab" data-bs-target="#binario-decimal" type="button" role="tab">
-                            <i class="bi bi-arrow-up"></i> Binario a Decimal
-                        </button>
-                    </li>
-                </ul>
-
-                <div class="tab-content p-4 border border-top-0 rounded-bottom bg-white">
-                    <div class="tab-pane fade show active" id="decimal-binario" role="tabpanel">
-                        <div class="mb-4">
-                            <label for="numeroDecimal" class="form-label fw-bold">
-                                <i class="bi bi-123"></i> Número Decimal:
-                            </label>
-                            <input type="number" class="form-control form-control-lg" id="numeroDecimal" placeholder="Ingrese un número decimal">
-                        </div>
-                        <button class="btn btn-primary px-4 py-2 fw-bold" onclick="convertirDecimalABinario()">
-                            <i class="bi bi-arrow-repeat"></i> Convertir
-                        </button>
-                        <div class="mt-4">
-                            <label class="form-label fw-bold">Resultado en Binario:</label>
-                            <div class="alert alert-info fw-bold fs-5" id="resultadoBinario">-</div>
-                        </div>
-                        <div class="mt-4">
-                            <h5 class="section-title">Proceso de Conversión:</h5>
-                            <div id="procesoConversion" class="conversion-process"></div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="binario-decimal" role="tabpanel">
-                        <div class="mb-4">
-                            <label for="numeroBinario" class="form-label fw-bold">
-                                <i class="bi bi-0-circle-fill"></i> Número Binario:
-                            </label>
-                            <input type="text" class="form-control form-control-lg" id="numeroBinario" placeholder="Ingrese un número binario (ej: 1010)">
-                        </div>
-                        <button class="btn btn-primary px-4 py-2 fw-bold" onclick="convertirBinarioADecimal()">
-                            <i class="bi bi-arrow-repeat"></i> Convertir
-                        </button>
-                        <div class="mt-4">
-                            <label class="form-label fw-bold">Resultado en Decimal:</label>
-                            <div class="alert alert-info fw-bold fs-5" id="resultadoDecimal">-</div>
-                        </div>
-                        <div class="mt-4">
-                            <h5 class="section-title">Proceso de Conversión:</h5>
-                            <div id="procesoConversionBinario" class="conversion-process"></div>
-                        </div>
-                    </div>
-                </div>
+            <button class="btn btn-primary px-4 py-2 fw-bold" onclick="convertirDecimalABinario()">
+              <i class="bi bi-arrow-repeat"></i> Convertir
+            </button>
+            <div class="mt-4">
+              <label class="form-label fw-bold">Resultado en Binario:</label>
+              <div class="alert alert-info fw-bold fs-5" id="resultadoBinario">-</div>
             </div>
+            <div class="mt-4">
+              <h5 class="section-title">Proceso de Conversión:</h5>
+              <div id="procesoConversion" class="conversion-process"></div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="binario-decimal" role="tabpanel">
+            <div class="mb-4">
+              <label for="numeroBinario" class="form-label fw-bold">
+                <i class="bi bi-0-circle-fill"></i> Número Binario:
+              </label>
+              <input type="text" class="form-control form-control-lg" id="numeroBinario"
+                placeholder="Ej: 11111111">
+            </div>
+            <button class="btn btn-primary px-4 py-2 fw-bold" onclick="convertirBinarioADecimal()">
+              <i class="bi bi-arrow-repeat"></i> Convertir
+            </button>
+            <div class="mt-4">
+              <label class="form-label fw-bold">Resultado en Decimal:</label>
+              <div class="alert alert-info fw-bold fs-5" id="resultadoDecimal">-</div>
+            </div>
+            <div class="mt-4">
+              <h5 class="section-title">Proceso de Conversión:</h5>
+              <div id="procesoConversionBinario" class="conversion-process"></div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Pie de página -->
-    <footer class="footer mt-5 py-4 bg-primary text-white">
-        <div class="container text-center">
-            <span class="d-block mb-2">
-                Sistema de automatización de tareas laboriosas desarrollado por: 
-                <strong>Cristopher</strong>
-            </span>
-            <span class="d-block">© 2025 Todos los derechos reservados</span>
-        </div>
-    </footer>
+  <footer class="footer mt-5 py-4 bg-primary text-white">
+    <div class="container text-center">
+      <span class="d-block mb-2">
+        Sistema desarrollado por: <strong>Cristopher</strong>
+      </span>
+      <span class="d-block">© 2025 Todos los derechos reservados</span>
+    </div>
+  </footer>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
